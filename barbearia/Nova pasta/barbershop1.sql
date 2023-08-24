@@ -1,6 +1,6 @@
-CREATE DATABASE barbershop;
+CREATE DATABASE barbershop1;
 
-USE barbershop;
+USE barbershop1;
 
 CREATE TABLE appointments (
     id INT AUTO_INCREMENT PRIMARY KEY,
