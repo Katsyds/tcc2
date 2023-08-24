@@ -3,13 +3,13 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
 const app = express();
-const port = 3000;
+const port = 3306;
 
 // Conexão com o banco de dados MySQL
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'seu_usuario',
-  password: 'sua_senha',
+  user: 'katsyds',
+  password: '120701',
   database: 'barbershop'
 });
 
