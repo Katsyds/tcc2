@@ -27,6 +27,7 @@
                 <th>Horário</th>
                 <th>Data</th>
                 <th>Serviço</th>
+                <th>email</th>
               </tr>
             </thead>
             <tbody>
@@ -53,9 +54,10 @@
         <td>${agendamento.id}</td>
         <td>${agendamento.nome}</td>
         <td>${agendamento.horario}</td>
+        <td>${agendamento.data}</td>
         <td>${agendamento.servico}</td>
         <td>${agendamento.email}</td>
-        <td>${agendamento.data}</td>
+        
       `;
       tbody.appendChild(row);
     });
