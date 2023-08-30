@@ -23,17 +23,18 @@ app.get('/', (req, res) => {
 
 // Rota para receber as informações do agendamento
 app.post('/agendamento', express.json(), (req, res) => {
-    const { nome, horario, servico } = req.body;
-  
-    db.run(`INSERT INTO agendamentos (nome, horario, servico) VALUES (?, ?, ?)`, [nome, horario, servico], (err) => {
-      if (err) {
-        console.error(err.message);
-        res.status(500).send('Erro ao agendar horário');
-      } else {
-        res.send('Horário agendado com sucesso');
-      }
-    });
+  const { nome, horario, servico } = req.body;
+
+  db.run(`INSERT INTO agendamentos (nome, horario, servico) VALUES (?, ?, ?)`, [nome, horario, servico], (err) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send('Erro ao agendar horário');
+    } else {
+      res.send('Horário agendado com sucesso');
+    }
   });
+});
+
 
   // Rota para acessar a página de gerenciamento
   app.get('/gerenciamento', (req, res) => {
@@ -51,11 +52,6 @@ app.post('/agendamento', express.json(), (req, res) => {
         res.json(rows);
       }
     });
-  });
-  
-  // Rota para receber as informações do agendamento
-  app.post('/agendamento', express.json(), (req, res) => {
-    // ... Código para inserir agendamentos no banco de dados ...
   });
   
 // Inicia o servidor

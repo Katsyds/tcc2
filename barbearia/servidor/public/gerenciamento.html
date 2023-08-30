@@ -3,43 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style2.css">
   <title>Gerenciamento de Agendamentos</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">Barbearia Tradicional</div>
+    </nav>
+  </header>
+  
+  <section id="hero">
+    <div class="hero-content">
+      <div class="banner">
+        <div class="content-container">
+          <h1>Gerenciamento de Agendamentos</h1>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Horário</th>
+                <th>Serviço</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Os agendamentos serão inseridos aqui dinamicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2023 Barbearia Tradicional. Todos os direitos reservados.</p>
+  </footer>
 
   <script>
     fetch('/agendamentos')
-      .then(response => response.json())
-      .then(data => {
-        const tbody = document.querySelector('tbody');
-        data.forEach(agendamento => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${agendamento.id}</td>
-            <td>${agendamento.nome}</td>
-            <td>${agendamento.horario}</td>
-            <td>${agendamento.servico}</td>
-          `;
-          tbody.appendChild(row);
-        });
-      })
-      .catch(error => console.error(error));
+  .then(response => response.json())
+  .then(data => {
+    const tbody = document.querySelector('tbody');
+    data.forEach(agendamento => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${agendamento.id}</td>
+        <td>${agendamento.nome}</td>
+        <td>${agendamento.horario}</td>
+        <td>${agendamento.servico}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  })
+  .catch(error => console.error(error));
+
   </script>
-  
-</head>
-<body>
-  <h1>Gerenciamento de Agendamentos</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Horário</th>
-        <th>Serviço</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Os agendamentos serão inseridos aqui dinamicamente -->
-    </tbody>
-  </table>
 </body>
 </html>
