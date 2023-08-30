@@ -75,7 +75,7 @@
 
     <section id="contact" class="content-block">
         
-        <form id="reservation-form">
+        <form id="reservation-form" action="/agendamento" method="POST">
             <h3>Agende um Horário</h3>
             <label for="name">Nome:</label>
             <input type="text" id="name" name="name" required>
@@ -101,7 +101,40 @@
     <footer>
         <p>&copy; 2023 Barbearia Tradicional. Todos os direitos reservados.</p>
     </footer>
-
-    <script src="servidor/server.js"></script>
 </body>
+<script>
+    document.getElementById('reservation-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const nome = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const servico = document.getElementById('service').value;
+        const data = document.getElementById('date').value;
+        const horario = document.getElementById('time').value;
+
+        const agendamentoData = {
+            nome,
+            email,
+            servico,
+            data,
+            horario
+        };
+
+        fetch('/agendamento', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(agendamentoData)
+        })
+        .then(response => response.text())
+        .then(message => {
+            console.log(message);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    });
+</script>
+
 </html>

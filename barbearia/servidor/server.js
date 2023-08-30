@@ -13,8 +13,14 @@ const db = new sqlite3.Database('db.sqlite');
 db.run(`CREATE TABLE IF NOT EXISTS agendamentos (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nome TEXT,
-  horario TEXT
+  horario TEXT,
+  servico TEXT,
+  email TEXT,
+  data TEXT
 )`);
+
+
+
 
 // Rota raiz, serve o arquivo index.html
 app.get('/', (req, res) => {
@@ -23,17 +29,18 @@ app.get('/', (req, res) => {
 
 // Rota para receber as informações do agendamento
 app.post('/agendamento', express.json(), (req, res) => {
-  const { nome, horario, servico } = req.body;
+  const { nome, email, servico, data, horario } = req.body;
 
-  db.run(`INSERT INTO agendamentos (nome, horario, servico) VALUES (?, ?, ?)`, [nome, horario, servico], (err) => {
-    if (err) {
-      console.error(err.message);
-      res.status(500).send('Erro ao agendar horário');
-    } else {
-      res.send('Horário agendado com sucesso');
-    }
+  db.run(`INSERT INTO agendamentos (nome, email, servico, horario, data) VALUES (?, ?, ?, ?, ?)`, [nome, email, servico, horario, data], (err) => {
+      if (err) {
+          console.error(err.message);
+          res.status(500).send('Erro ao agendar horário');
+      } else {
+          res.send('Horário agendado com sucesso');
+      }
   });
 });
+
 
 
   // Rota para acessar a página de gerenciamento

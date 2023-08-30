@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style2.css">
+
   <title>Gerenciamento de Agendamentos</title>
 </head>
 <body>
@@ -24,6 +25,7 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Horário</th>
+                <th>Data</th>
                 <th>Serviço</th>
               </tr>
             </thead>
@@ -52,6 +54,8 @@
         <td>${agendamento.nome}</td>
         <td>${agendamento.horario}</td>
         <td>${agendamento.servico}</td>
+        <td>${agendamento.email}</td>
+        <td>${agendamento.data}</td>
       `;
       tbody.appendChild(row);
     });
