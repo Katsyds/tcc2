@@ -57,6 +57,7 @@ body {
     border-collapse: collapse;
     border-spacing: 0;
     margin-top: 20px;
+    color: black;
   }
   
   th, td {

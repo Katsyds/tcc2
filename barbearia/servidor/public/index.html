@@ -104,37 +104,55 @@
 </body>
 <script>
     document.getElementById('reservation-form').addEventListener('submit', function(event) {
-        event.preventDefault();
+    event.preventDefault();
 
-        const nome = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const servico = document.getElementById('service').value;
-        const data = document.getElementById('date').value;
-        const horario = document.getElementById('time').value;
+    const nome = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const servico = document.getElementById('service').value;
+    const data = document.getElementById('date').value;
+    const horario = document.getElementById('time').value;
 
-        const agendamentoData = {
-            nome,
-            email,
-            servico,
-            data,
-            horario
-        };
+    // Função para verificar se o horário está dentro do intervalo permitido (10:00 - 17:00)
+    function isHorarioValido(horario) {
+        const horarioData = new Date(`1970-01-01T${horario}`);
+        const horarioMinimo = new Date(`1970-01-01T10:00`);
+        const horarioMaximo = new Date(`1970-01-01T17:00`);
+        return horarioData >= horarioMinimo && horarioData <= horarioMaximo;
+    }
 
-        fetch('/agendamento', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(agendamentoData)
-        })
-        .then(response => response.text())
-        .then(message => {
-            console.log(message);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+    // Verificar se o horário está dentro do intervalo permitido
+    if (!isHorarioValido(horario)) {
+        alert('Horário fora do intervalo permitido (10:00 - 17:00)');
+        return; // Impede o envio do formulário
+    }
+
+    // Validar se o horário já está agendado (você pode adicionar sua própria lógica aqui)
+
+    // Se todas as validações passarem, enviar o formulário
+    const agendamentoData = {
+        nome,
+        email,
+        servico,
+        data,
+        horario
+    };
+
+    fetch('/agendamento', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(agendamentoData)
+    })
+    .then(response => response.text())
+    .then(message => {
+        console.log(message);
+    })
+    .catch(error => {
+        console.error(error);
     });
+});
+
 </script>
 
 </html>
