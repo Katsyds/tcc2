@@ -112,88 +112,85 @@
     <footer>
         <p>&copy; 2023 Barbearia Tradicional. Todos os direitos reservados.</p>
     </footer>
+    <script>
+        document.getElementById('reservation-form').addEventListener('submit', function (event) {
+         event.preventDefault();
+     
+         const nome = document.getElementById('name').value;
+         const email = document.getElementById('email').value;
+         const servico = document.getElementById('service').value;
+         const data = document.getElementById('date').value;
+         const horario = horarioSelecionado; // Use o horário selecionado
+     
+         // Função para verificar se o horário está dentro do intervalo permitido (10:00 - 17:00)
+         function isHorarioValido(horario) {
+             const horarioData = new Date(`1970-01-01T${horario}`);
+             const horarioMinimo = new Date(`1970-01-01T10:00`);
+             const horarioMaximo = new Date(`1970-01-01T17:00`);
+             return horarioData >= horarioMinimo && horarioData <= horarioMaximo;
+         }
+     
+         // Verificar se o horário está dentro do intervalo permitido
+         if (!isHorarioValido(horario)) {
+             alert('Horário fora do intervalo permitido (10:00 - 17:00)');
+             return; // Impede o envio do formulário
+         }
+     
+         // Validar se o horário já está agendado (você pode adicionar sua própria lógica aqui)
+     
+         // Se todas as validações passarem, enviar o formulário
+         const agendamentoData = {
+             nome,
+             email,
+             servico,
+             data,
+             horario
+         };
+     
+         fetch('/agendamento', {
+             method: 'POST',
+             headers: {
+                 'Content-Type': 'application/json'
+             },
+             body: JSON.stringify(agendamentoData)
+         })
+             .then(response => response.text())
+             .then(message => {
+                 console.log(message);
+             })
+             .catch(error => {
+                 console.error(error);
+             });
+     });
+     
+     // Adicione um ouvinte de evento a cada botão de horário
+     const buttons = document.querySelectorAll('.horario-button');
+     buttons.forEach(button => {
+         button.addEventListener('click', () => {
+             const horario = button.textContent; // Obtém o horário do botão clicado
+     
+             // Realce o botão selecionado para indicar a seleção
+             buttons.forEach(btn => {
+                 btn.classList.remove('selecionado');
+             });
+     
+             button.classList.add('selecionado');
+     
+             // Atualize a variável horarioSelecionado
+             horarioSelecionado = horario;
+         });
+     });
+     
+     // Adicione uma função para limpar a seleção quando a data é alterada
+     document.getElementById('date').addEventListener('change', () => {
+         horarioSelecionado = null;
+         buttons.forEach(button => {
+             button.classList.remove('selecionado');
+         });
+     });
+     
+     </script>
 </body>
-<script>
-   let horarioSelecionado = null;
 
-// Função para selecionar um horário quando o botão é clicado
-function selecionarHorario(horario) {
-    horarioSelecionado = horario;
-    // Realce o botão selecionado para indicar a seleção
-    const buttons = document.querySelectorAll('.horario-button');
-    buttons.forEach(button => {
-        button.classList.remove('selecionado');
-    });
-    document.getElementById(`horario-${horario}`).classList.add('selecionado');
-}
-
-// Adicione um ouvinte de evento a cada botão de horário
-const buttons = document.querySelectorAll('.horario-button');
-buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        const horario = button.textContent; // Obtém o horário do botão clicado
-        selecionarHorario(horario);
-    });
-});
-
-// Adicione uma função para limpar a seleção quando a data é alterada
-document.getElementById('date').addEventListener('change', () => {
-    horarioSelecionado = null;
-    const buttons = document.querySelectorAll('.horario-button');
-    buttons.forEach(button => {
-        button.classList.remove('selecionado');
-    });
-});
-
-document.getElementById('reservation-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const nome = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const servico = document.getElementById('service').value;
-    const data = document.getElementById('date').value;
-    const horario = horarioSelecionado; // Use o horário selecionado
-
-    // Função para verificar se o horário está dentro do intervalo permitido (10:00 - 17:00)
-    function isHorarioValido(horario) {
-        const horarioData = new Date(`1970-01-01T${horario}`);
-        const horarioMinimo = new Date(`1970-01-01T10:00`);
-        const horarioMaximo = new Date(`1970-01-01T17:00`);
-        return horarioData >= horarioMinimo && horarioData <= horarioMaximo;
-    }
-
-    // Verificar se o horário está dentro do intervalo permitido
-    if (!isHorarioValido(horario)) {
-        alert('Horário fora do intervalo permitido (10:00 - 17:00)');
-        return; // Impede o envio do formulário
-    }
-
-    // Validar se o horário já está agendado (você pode adicionar sua própria lógica aqui)
-
-    // Se todas as validações passarem, enviar o formulário
-    const agendamentoData = {
-        nome,
-        email,
-        servico,
-        data,
-        horario
-    };
-
-    fetch('/agendamento', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(agendamentoData)
-    })
-    .then(response => response.text())
-    .then(message => {
-        console.log(message);
-    })
-    .catch(error => {
-        console.error(error);
-    });
-});
-</script>
 
 </html>

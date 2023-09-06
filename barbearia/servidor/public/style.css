@@ -233,8 +233,7 @@ nav ul li a:hover {
 }
 
 #reservation-form button {
-    background-color: #dcb45e;
-    color: #fff;
+    
     border: none;
     padding: 12px 20px;
     border-radius: 5px;
@@ -245,6 +244,7 @@ nav ul li a:hover {
 
 #reservation-form button:hover {
     background-color: #c4a245;
+    color: #000;
 }
 
 /* Estilize o formulário para telas menores */
@@ -275,25 +275,28 @@ nav ul li a:hover {
     margin-top: 15px;
 }
 
-/* Estilo para botões de horário ocupados */
-.horario-ocupado {
-    background-color: red;
-    color: white;
-    cursor: not-allowed;
+/* Estilize os botões de horário */
+.horario-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
-/*  botões de horário */
+
 .horario-button {
-    background-color: #fff; 
-    color: #000; 
+    background-color: #c4a280; 
+    color: #fff; 
     border: 1px solid #ccc; 
     padding: 5px 10px; 
     margin-right: 10px; 
     cursor: pointer; 
+    transition: border-color 0.3s; /* Adicione uma transição suave para a borda */
 }
 
+/* Estilize a borda quando o botão estiver selecionado */
 .horario-button.selecionado {
-    background-color: #3498db; 
-    color: #fff; 
+    border-color: #6faa3a; /* Cor da borda quando selecionado (verde claro) */
+    background-color: #6faa3a; /* Fundo quando selecionado (verde claro) */
+    color: #fff; /* Cor do texto quando selecionado (branco) */
 }
 
 
