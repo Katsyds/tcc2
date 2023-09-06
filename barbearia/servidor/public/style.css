@@ -275,6 +275,29 @@ nav ul li a:hover {
     margin-top: 15px;
 }
 
+/* Estilo para botões de horário ocupados */
+.horario-ocupado {
+    background-color: red;
+    color: white;
+    cursor: not-allowed;
+}
+/*  botões de horário */
+.horario-button {
+    background-color: #fff; 
+    color: #000; 
+    border: 1px solid #ccc; 
+    padding: 5px 10px; 
+    margin-right: 10px; 
+    cursor: pointer; 
+}
+
+.horario-button.selecionado {
+    background-color: #3498db; 
+    color: #fff; 
+}
+
+
+
 /* Footer */
 footer {
     background-color: #2a2a2a;
