@@ -5,6 +5,7 @@ const port = 4002;
 
 // Configuração do middleware para servir arquivos estáticos da pasta "public"
 app.use(express.static('public'));
+app.use(express.json()); // Parse JSON no corpo das solicitações
 
 // Conectar ao banco de dados SQLite
 const db = new sqlite3.Database('db.sqlite');
@@ -24,20 +25,33 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
+// Rota para obter os agendamentos do banco de dados
+app.get('/agendamentos', (req, res) => {
+  db.all(`SELECT * FROM agendamentos`, [], (err, rows) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send('Erro ao buscar agendamentos');
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
+// Rota para agendar um horário
 app.post('/agendamento', express.json(), (req, res) => {
   const { nome, horario, email, servico, data } = req.body;
 
-  // Verificar se o horário já está ocupado
-  db.get(`SELECT COUNT(*) as count FROM agendamentos WHERE horario = ? AND DATE(horario) = DATE(?)`, [horario, horario], (err, row) => {
+  // Verificar se o horário já está ocupado para a data especificada
+  db.get(`SELECT COUNT(*) as count FROM agendamentos WHERE horario = ? AND data = ?`, [horario, data], (err, row) => {
     if (err) {
       console.error(err.message);
       res.status(500).send('Erro ao verificar horário');
     } else {
       const count = row.count;
       if (count > 0) {
-        res.status(400).send('Horário já está ocupado para a data especificada');
+        res.status(400).send('Horário já está ocupado para esta data.');
       } else {
-        // Inserir o novo agendamento com a data
+        // Inserir o novo agendamento com data e hora
         db.run(`INSERT INTO agendamentos (nome, horario, email, servico, data) VALUES (?, ?, ?, ?, ?)`, [nome, horario, email, servico, data], (err) => {
           if (err) {
             console.error(err.message);
@@ -51,23 +65,11 @@ app.post('/agendamento', express.json(), (req, res) => {
   });
 });
 
-
 // Rota para acessar a página de gerenciamento
 app.get('/gerenciamento', (req, res) => {
   res.sendFile(__dirname + '/public/gerenciamento.html');
 });
 
-// Rota para obter os agendamentos do banco de dados
-app.get('/agendamentos', (req, res) => {
-  db.all(`SELECT * FROM agendamentos`, [], (err, rows) => {
-    if (err) {
-      console.error(err.message);
-      res.status(500).send('Erro ao buscar agendamentos');
-    } else {
-      res.json(rows);
-    }
-  });
-});
 
 // Inicia o servidor
 app.listen(port, () => {

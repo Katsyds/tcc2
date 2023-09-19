@@ -45,25 +45,24 @@
 
   <script>
     fetch('/agendamentos')
-  .then(response => response.json())
-  .then(data => {
-    const tbody = document.querySelector('tbody');
-    data.forEach(agendamento => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${agendamento.id}</td>
-        <td>${agendamento.nome}</td>
-        <td>${agendamento.horario}</td>
-        <td>${agendamento.data}</td>
-        <td>${agendamento.servico}</td>
-        <td>${agendamento.email}</td>
-        
-      `;
-      tbody.appendChild(row);
-    });
-  })
-  .catch(error => console.error(error));
-
+      .then(response => response.json())
+      .then(data => {
+        console.log('Dados recebidos:', data);
+        const tbody = document.querySelector('tbody');
+        data.forEach(agendamento => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${agendamento.id}</td>
+            <td>${agendamento.nome}</td>
+            <td>${agendamento.horario}</td>
+            <td>${agendamento.data}</td>
+            <td>${agendamento.servico}</td>
+            <td>${agendamento.email}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Erro na solicitação:', error));
   </script>
 </body>
 </html>

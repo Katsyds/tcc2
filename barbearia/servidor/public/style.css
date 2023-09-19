@@ -299,7 +299,13 @@ nav ul li a:hover {
     color: #fff; /* Cor do texto quando selecionado (branco) */
 }
 
-
+/* Adicione esta classe para estilizar os botões ocupados */
+.horario-ocupado {
+    background-color: #ff0000; /* Vermelho */
+    color: #fff; /* Branco */
+    border-color: #ff0000; /* Vermelho */
+  }
+  
 
 /* Footer */
 footer {

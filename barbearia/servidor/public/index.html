@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Barbearia</title>
-    
 </head>
 <body>
     <header>
@@ -75,8 +74,7 @@
     </section>
 
     <section id="contact" class="content-block">
-        
-        <form id="reservation-form" action="/agendamento" method="POST">
+        <form id="reservation-form">
             <h3>Agende um Horário</h3>
             <label for="name">Nome:</label>
             <input type="text" id="name" name="name" required>
@@ -91,106 +89,126 @@
             <label for="date">Data:</label>
             <input type="date" id="date" name="date" required>
             
-            <label for="horario">Horário:</label>
+            <label for="time">Horário:</label>
             <div id="horario-buttons">
               <button class="horario-button" id="horario-10">10:00</button>
               <button class="horario-button" id="horario-11">11:00</button>
-              <button class="horario-button" id="horario-11">12:00</button>
-              <button class="horario-button" id="horario-11">13:00</button>
-              <button class="horario-button" id="horario-11">14:00</button>
-              <button class="horario-button" id="horario-11">15:00</button> 
-              <button class="horario-button" id="horario-11">16:00</button> 
-              <button class="horario-button" id="horario-11">17:00</button> 
+              <button class="horario-button" id="horario-12">12:00</button>
+              <button class="horario-button" id="horario-13">13:00</button>
+              <button class="horario-button" id="horario-14">14:00</button>
+              <button class="horario-button" id="horario-15">15:00</button> 
+              <button class="horario-button" id="horario-16">16:00</button> 
+              <button class="horario-button" id="horario-17">17:00</button> 
               <!-- Adicione mais botões para outros horários -->
             </div>
             <button type="submit" class="btn">Agendar</button>
         </form>
-        
-        
     </section>
 
     <footer>
         <p>&copy; 2023 Barbearia Tradicional. Todos os direitos reservados.</p>
     </footer>
     <script>
-        document.getElementById('reservation-form').addEventListener('submit', function (event) {
-         event.preventDefault();
-     
-         const nome = document.getElementById('name').value;
-         const email = document.getElementById('email').value;
-         const servico = document.getElementById('service').value;
-         const data = document.getElementById('date').value;
-         const horario = horarioSelecionado; // Use o horário selecionado
-     
-         // Função para verificar se o horário está dentro do intervalo permitido (10:00 - 17:00)
-         function isHorarioValido(horario) {
-             const horarioData = new Date(`1970-01-01T${horario}`);
-             const horarioMinimo = new Date(`1970-01-01T10:00`);
-             const horarioMaximo = new Date(`1970-01-01T17:00`);
-             return horarioData >= horarioMinimo && horarioData <= horarioMaximo;
-         }
-     
-         // Verificar se o horário está dentro do intervalo permitido
-         if (!isHorarioValido(horario)) {
-             alert('Horário fora do intervalo permitido (10:00 - 17:00)');
-             return; // Impede o envio do formulário
-         }
-     
-         // Validar se o horário já está agendado (você pode adicionar sua própria lógica aqui)
-     
-         // Se todas as validações passarem, enviar o formulário
-         const agendamentoData = {
-             nome,
-             email,
-             servico,
-             data,
-             horario
-         };
-     
-         fetch('/agendamento', {
-             method: 'POST',
-             headers: {
-                 'Content-Type': 'application/json'
-             },
-             body: JSON.stringify(agendamentoData)
-         })
-             .then(response => response.text())
-             .then(message => {
-                 console.log(message);
-             })
-             .catch(error => {
-                 console.error(error);
-             });
-     });
-     
-     // Adicione um ouvinte de evento a cada botão de horário
-     const buttons = document.querySelectorAll('.horario-button');
-     buttons.forEach(button => {
-         button.addEventListener('click', () => {
-             const horario = button.textContent; // Obtém o horário do botão clicado
-     
-             // Realce o botão selecionado para indicar a seleção
-             buttons.forEach(btn => {
-                 btn.classList.remove('selecionado');
-             });
-     
-             button.classList.add('selecionado');
-     
-             // Atualize a variável horarioSelecionado
-             horarioSelecionado = horario;
-         });
-     });
-     
-     // Adicione uma função para limpar a seleção quando a data é alterada
-     document.getElementById('date').addEventListener('change', () => {
-         horarioSelecionado = null;
-         buttons.forEach(button => {
-             button.classList.remove('selecionado');
-         });
-     });
-     
-     </script>
+       document.getElementById('reservation-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const nome = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const servico = document.getElementById('service').value;
+    const data = document.getElementById('date').value;
+
+    // Obtém todos os botões de horário
+    const buttons = document.querySelectorAll('.horario-button');
+
+    // Encontra o botão selecionado
+    const horarioSelecionadoButton = Array.from(buttons).find(button => button.classList.contains('selecionado'));
+
+    if (!horarioSelecionadoButton) {
+        alert('Por favor, selecione um horário disponível.');
+        return; // Não continue o envio do formulário se nenhum horário estiver selecionado
+    }
+
+    const horario = horarioSelecionadoButton.textContent;
+
+    // Se todas as validações passarem, enviar o formulário
+    const agendamentoData = {
+        nome,
+        email,
+        servico,
+        data,
+        horario
+    };
+
+    try {
+        const response = await fetch('/agendamento', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(agendamentoData),
+        });
+
+        if (response.ok) {
+            const message = await response.text();
+            console.log(message);
+        } else {
+            console.error('Erro ao enviar o formulário de agendamento.');
+        }
+    } catch (error) {
+        console.error('Erro ao processar a solicitação:', error);
+    }
+});
+
+// Restante do código permanece o mesmo
+
+
+        // Função para verificar se um horário está ocupado para uma data
+        async function verificarHorarioOcupado(data, horario) {
+            const response = await fetch('/verificarHorarioOcupado', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ data, horario }),
+            });
+
+            if (response.ok) {
+                const resultado = await response.json();
+                return resultado.ocupado;
+            } else {
+                console.error('Erro ao verificar horário ocupado.');
+                return false;
+            }
+        }
+
+        // Adicione um ouvinte de evento a cada botão de horário
+        const buttons = document.querySelectorAll('.horario-button');
+        buttons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const horario = button.textContent; // Obtém o horário do botão clicado
+                const data = document.getElementById('date').value; // Obtém a data selecionada
+
+                const horarioOcupado = await verificarHorarioOcupado(data, horario);
+
+                if (horarioOcupado) {
+                    alert('Este horário já está ocupado para esta data.');
+                } else {
+                    // Realce o botão selecionado para indicar a seleção
+                    buttons.forEach(btn => {
+                        btn.classList.remove('selecionado');
+                    });
+
+                    button.classList.add('selecionado');
+                }
+            });
+        });
+
+        // Adicione uma função para limpar a seleção quando a data é alterada
+        document.getElementById('date').addEventListener('change', () => {
+            buttons.forEach(button => {
+                button.classList.remove('selecionado');
+            });
+        });
+    </script>
 </body>
-
-
 </html>
