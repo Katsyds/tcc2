@@ -61,6 +61,25 @@ app.get('/gerenciamento', (req, res) => {
   res.sendFile(__dirname + '/public/gerenciamento.html');
 });
 
+// Rota para verificar a disponibilidade de horário
+app.get('/verificarHorarioOcupado', (req, res) => {
+  const { data, horario } = req.query;
+
+  db.get(`SELECT COUNT(*) as count FROM agendamentos WHERE horario = ? AND data = ?`, [horario, data], (err, row) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).json({ ocupado: false }); // Assume que não está ocupado em caso de erro
+    } else {
+      const count = row.count;
+      if (count > 0) {
+        res.json({ ocupado: true }); // Está ocupado
+      } else {
+        res.json({ ocupado: false }); // Não está ocupado
+      }
+    }
+  });
+});
+
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });

@@ -243,7 +243,7 @@ nav ul li a:hover {
 }
 
 #reservation-form button:hover {
-    background-color: #c4a245;
+    /* background-color: #c4a245; */
     color: #000;
 }
 
@@ -292,17 +292,34 @@ nav ul li a:hover {
     transition: border-color 0.3s; /* Adicione uma transição suave para a borda */
 }
 
-/* Botão verde para horários disponíveis */
-.horario-disponivel {
-    background-color: green;
-    color: #000;
+/* Botões de horário disponível */
+.horario-button.horario-disponivel {
+    background-color: green; /* Cor de fundo verde para horários disponíveis */
+    color: white; /* Texto em branco para melhor visibilidade */
 }
 
-/* Botão vermelho para horários ocupados */
-.horario-ocupado {
-    background-color: red;
-    color: #000;
+/* Botões de horário ocupado */
+.horario-button.horario-ocupado {
+    background-color: red; /* Cor de fundo vermelha para horários ocupados */
+    color: white; /* Texto em branco para melhor visibilidade */
 }
+
+/* Botões de horário selecionado */
+.horario-button.horario-disponivel.selecionado {
+    background-color: darkgreen; /* Cor de fundo verde escuro para horários selecionados */
+    color: white; /* Texto em branco para melhor visibilidade */
+}
+.horario-button.horario-ocupado.selecionado {
+    background-color: darkred; /* Cor de fundo verde escuro para horários selecionados */
+    color: white; /* Texto em branco para melhor visibilidade */
+}
+
+.horario-message {
+    color: red;
+    font-weight: bold;
+    display: none; /* Inicialmente, oculte a mensagem */
+}
+
 
 /* Footer */
 footer {
