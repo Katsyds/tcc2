@@ -292,20 +292,17 @@ nav ul li a:hover {
     transition: border-color 0.3s; /* Adicione uma transição suave para a borda */
 }
 
-/* Estilize a borda quando o botão estiver selecionado */
-.horario-button.selecionado {
-    border-color: #6faa3a; /* Cor da borda quando selecionado (verde claro) */
-    background-color: #6faa3a; /* Fundo quando selecionado (verde claro) */
-    color: #fff; /* Cor do texto quando selecionado (branco) */
+/* Botão verde para horários disponíveis */
+.horario-disponivel {
+    background-color: green;
+    color: #000;
 }
 
-/* Adicione esta classe para estilizar os botões ocupados */
+/* Botão vermelho para horários ocupados */
 .horario-ocupado {
-    background-color: #ff0000; /* Vermelho */
-    color: #fff; /* Branco */
-    border-color: #ff0000; /* Vermelho */
-  }
-  
+    background-color: red;
+    color: #000;
+}
 
 /* Footer */
 footer {
