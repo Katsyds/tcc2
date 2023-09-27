@@ -80,6 +80,28 @@ app.get('/verificarHorarioOcupado', (req, res) => {
   });
 });
 
+
+
+
+// Rota para excluir um agendamento pelo ID
+app.delete('/excluir-agendamento/:id', (req, res) => {
+  const { id } = req.params;
+
+  db.run('DELETE FROM agendamentos WHERE id = ?', [id], (err) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send('Erro ao excluir o agendamento');
+    } else {
+      res.send('Agendamento excluído com sucesso');
+    }
+  });
+});
+
+
+
+
+
+
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
 });

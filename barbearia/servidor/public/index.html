@@ -115,21 +115,24 @@
         let horarioSelecionado = null; // Variável para armazenar o horário selecionado
     
         // Adicione um ouvinte de evento a cada botão de horário
-        const buttons = document.querySelectorAll('.horario-button');
-        buttons.forEach(button => {
-            button.addEventListener('click', (event) => {
-                // Limpa a seleção de horário em todos os botões
-                buttons.forEach(btn => {
-                    btn.classList.remove('selecionado');
-                });
-    
-                // Define o botão atual como selecionado
-                button.classList.add('selecionado');
-    
-                // Define o horário selecionado como o último horário clicado
-                horarioSelecionado = button.textContent;
-            });
+const buttons = document.querySelectorAll('.horario-button');
+buttons.forEach(button => {
+    button.addEventListener('click', (event) => {
+        event.preventDefault(); // Evita a recarga da página
+
+        // Limpa a seleção de horário em todos os botões
+        buttons.forEach(btn => {
+            btn.classList.remove('selecionado');
         });
+
+        // Define o botão atual como selecionado
+        button.classList.add('selecionado');
+
+        // Define o horário selecionado como o último horário clicado
+        horarioSelecionado = button.textContent;
+    });
+});
+
     
         // Evento para capturar a seleção da data
 document.getElementById('date').addEventListener('change', async () => {

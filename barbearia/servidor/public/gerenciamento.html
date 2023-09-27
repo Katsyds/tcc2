@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
   <title>Gerenciamento de Agendamentos</title>
 </head>
@@ -22,12 +23,13 @@
           <table>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Horário</th>
-                <th>Data</th>
-                <th>Serviço</th>
-                <th>email</th>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Horário</th>
+              <th>Data</th>
+              <th>Serviço</th>
+              <th>Email</th>
+              <th>Ações</th> 
               </tr>
             </thead>
             <tbody>
@@ -44,25 +46,62 @@
   </footer>
 
   <script>
-    fetch('/agendamentos')
-      .then(response => response.json())
-      .then(data => {
-        console.log('Dados recebidos:', data);
-        const tbody = document.querySelector('tbody');
-        data.forEach(agendamento => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${agendamento.id}</td>
-            <td>${agendamento.nome}</td>
-            <td>${agendamento.horario}</td>
-            <td>${agendamento.data}</td>
-            <td>${agendamento.servico}</td>
-            <td>${agendamento.email}</td>
-          `;
-          tbody.appendChild(row);
-        });
-      })
-      .catch(error => console.error('Erro na solicitação:', error));
+   fetch('/agendamentos')
+  .then(response => response.json())
+  .then(data => {
+    console.log('Dados recebidos:', data);
+    const tbody = document.querySelector('tbody');
+    data.forEach(agendamento => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${agendamento.id}</td>
+        <td>${agendamento.nome}</td>
+        <td>${agendamento.horario}</td>
+        <td>${agendamento.data}</td>
+        <td>${agendamento.servico}</td>
+        <td>${agendamento.email}</td>
+        <td>
+          <button class="excluir-btn" data-id="${agendamento.id}">
+            <i class="fas fa-trash-alt"></i> <!-- Ícone de lixeira -->
+          </button>
+        </td>
+      `;
+
+      tbody.appendChild(row);
+    });
+
+   // ...
+
+const excluirBtns = document.querySelectorAll('.excluir-btn');
+excluirBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.getAttribute('data-id');
+    
+    // Envie a solicitação de exclusão para o servidor
+    fetch(`/excluir-agendamento/${id}`, {
+      method: 'DELETE', // Use o método DELETE para excluir o registro
+    })
+    .then(response => {
+      if (response.ok) {
+        // Registro excluído com sucesso, você pode atualizar a página ou fazer outra ação
+        alert('Registro excluído com sucesso!');
+        // Você também pode remover o registro da tabela dinamicamente, se desejar
+        btn.closest('tr').remove();
+      } else {
+        // Algo deu errado na exclusão, lide com o erro adequadamente
+        alert('Erro ao excluir o registro.');
+      }
+    })
+    .catch(error => console.error('Erro na solicitação de exclusão:', error));
+  });
+});
+
+// ...
+
+  })
+  .catch(error => console.error('Erro na solicitação:', error));
+
+      
   </script>
 </body>
 </html>
