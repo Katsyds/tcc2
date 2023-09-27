@@ -1,40 +1,37 @@
 npm install express mongoose body-parser
 
-
 /* Estilos gerais */
 body {
-    background-color: #fff; /* Altera a cor do texto para preto */
+    background-color: #fff;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
 }
 
-
 header {
-    background-color: #2a2a2a; /* Preto */
-    color: #fff; /* Branco */
+    background-color: #2a2a2a;
+    color: #fff;
     padding: 10px 0;
-}
-
-nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Alinha o logotipo à esquerda e o espaço à direita */
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    position: relative;
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #dcb45e; /* Marrom claro */
+    color: #dcb45e;
+    text-decoration: none; /* Adicione esta linha para remover sublinhado padrão */
+}
+
+nav {
+    display: flex;
+    gap: 20px;
 }
 
 nav ul {
     list-style: none;
-    display: flex;
-    gap: 20px;
 }
 
 nav ul li a {
@@ -46,22 +43,14 @@ nav ul li a {
 nav ul li a:hover {
     color: #dcb45e;
 }
+
 /* Estilos para telas menores */
 @media screen and (max-width: 767px) {
-    nav ul {
-        position: static;
-        background-color: transparent;
-        max-height: none;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-
-    nav ul li {
-        margin: 0;
+    nav {
+        display: none; /* Oculta o menu de navegação em telas menores */
     }
 }
+
 /* Hero section */
 
 /* Estilos para telas maiores */
