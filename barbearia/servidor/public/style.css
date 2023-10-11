@@ -1,11 +1,15 @@
 npm install express mongoose body-parser
-
+*{
+    margin: 0;
+    padding: 0;
+}
 /* Estilos gerais */
 body {
-    background-color: #fff;
+    background-color: #000 ;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    color: #fff;
 }
 
 header {
@@ -159,7 +163,7 @@ nav ul li a:hover {
 
 /* Testimonials section */
 .testimonial {
-    background-color: #fff;
+    background-color: #3a3a3a;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
@@ -169,7 +173,7 @@ nav ul li a:hover {
 .testimonial blockquote {
     font-style: italic;
     margin-bottom: 10px;
-    color: #2a2a2a;
+    color: #ccc;
 }
 
 /* Contact section */
@@ -177,7 +181,7 @@ nav ul li a:hover {
     max-width: 800px;
     margin: 0 auto;
     padding: 50px 20px;
-    background-color: #fff;
+    background-color: #2a2a2a;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     margin-bottom: 40px;
