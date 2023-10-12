@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/agendamentos', (req, res) => {
-  db.all(`SELECT * FROM agendamentos`, [], (err, rows) => {
+  db.all(`SELECT * FROM agendamentos ORDER BY data, horario`, [], (err, rows) => {
     if (err) {
       console.error(err.message);
       res.status(500).send('Erro ao buscar agendamentos');
