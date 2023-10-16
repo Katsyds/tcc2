@@ -78,8 +78,8 @@
             <h3>Agende um Horário</h3>
             <label for="name">Nome:</label>
             <input type="text" id="name" name="name" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <label for="numero">número:</label>
+            <input type="tel" id="numero" name="numero" required>
             <label for="service">Serviço:</label>
             <select id="service" name="service" required>
                 <option value="corte">Corte de Cabelo</option>
@@ -106,6 +106,7 @@
 
 
             <button type="button" class="btn" id="agendar-button">Agendar</button>
+            <h5>Por favor, reserve seu horário com pelo menos um dia de antecedência. Horários para o dia atual estarão indisponíveis.</hh5>
         </form>
     </section>
 
@@ -114,6 +115,8 @@
     </footer>
 
     <script>
+        
+
         let horarioSelecionado = null; // Variável para armazenar o horário selecionado
     
         // Adicione um ouvinte de evento a cada botão de horário
@@ -153,7 +156,7 @@ document.getElementById('date').addEventListener('change', async () => {
     
         document.getElementById('agendar-button').addEventListener('click', async () => {
             const nome = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
+            const numero = document.getElementById('numero').value;
             const servico = document.getElementById('service').value;
             const data = document.getElementById('date').value;
     
@@ -163,16 +166,16 @@ document.getElementById('date').addEventListener('change', async () => {
                 return; // Não continue o envio do formulário se nenhum horário estiver selecionado
             }
     
-            // Verifica se o nome e o email foram preenchidos
-            if (!nome || !email) {
-                alert('Por favor, preencha os campos de nome e email.');
-                return; // Não continue o envio do formulário se nome e/ou email estiverem em branco
+            // Verifica se o nome e o numero foram preenchidos
+            if (!nome || !numero) {
+                alert('Por favor, preencha os campos de nome e numero.');
+                return; // Não continue o envio do formulário se nome e/ou numero estiverem em branco
             }
     
             // Se todas as validações passarem, enviar o formulário
             const agendamentoData = {
                 nome,
-                email,
+                numero,
                 servico,
                 data,
                 horario: horarioSelecionado, // Usar o último horário selecionado
@@ -192,7 +195,7 @@ document.getElementById('date').addEventListener('change', async () => {
                     console.log(message);
                 } else {
                     console.error('Erro ao enviar o formulário de agendamento.');
-                    alert("horario ja reservado")
+                    alert("horario indisponivel")
                 }
             } catch (error) {
                 console.error('Erro ao processar a solicitação:', error);
@@ -218,6 +221,33 @@ document.getElementById('date').addEventListener('change', async () => {
                 return false;
             }
         }
+         // Evento para capturar a seleção da data e atualizar os botões de horário
+         document.getElementById('date').addEventListener('change', async () => {
+            const selectedDate = new Date(document.getElementById('date').value);
+            const today = new Date();
+            const buttons = document.querySelectorAll('.horario-button');
+
+            buttons.forEach(button => {
+                const buttonTime = parseInt(button.textContent);
+                if (selectedDate < today || (selectedDate.getTime() === today.getTime() && buttonTime < today.getHours())) {
+                    button.classList.add('horario-passado');
+                } else {
+                    button.classList.remove('horario-passado');
+                }
+            });
+
+            // Restante do seu código dentro do evento de mudança de data
+            // Obtém a data selecionada
+            const dataSelecionada = document.getElementById('date').value;
+
+            // Atualiza as classes CSS dos botões com base na disponibilidade do horário para a nova data
+            buttons.forEach(async btn => { // Adicione "async" aqui
+                const horario = btn.textContent;
+                const horarioOcupado = await verificarHorarioOcupado(dataSelecionada, horario);
+                btn.classList.toggle('horario-disponivel', !horarioOcupado);
+                btn.classList.toggle('horario-ocupado', horarioOcupado);
+            });
+        });
     </script>
     
 </body>

@@ -13,8 +13,8 @@ body {
 }
 
 header {
-    background-color: #2a2a2a; /* Preto */
-    color: #fff; /* Branco */
+    background-color: #2a2a2a; 
+    color: #fff; 
     padding: 10px 0;
 }
 
@@ -30,7 +30,7 @@ nav {
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #dcb45e; /* Marrom claro */
+    color: #dcb45e; 
 }
 
 nav ul {
@@ -52,14 +52,14 @@ nav ul li a:hover {
 /* Estilos para telas menores */
 @media screen and (max-width: 767px) {
     header {
-        justify-content: center; /* Centraliza os elementos no cabeçalho */
+        justify-content: center; 
     }
 
     .logo {
-        padding: 10px; /* Adiciona espaço interno para melhorar a aparência centralizada */
+        padding: 10px; 
     }
     nav ul {
-        display: none; /* Oculta o menu de navegação em telas menores */
+        display: none; 
     }
     
 
@@ -222,11 +222,20 @@ nav ul li a:hover {
 }
 
 #reservation-form input[type="text"],
-#reservation-form input[type="email"],
-#reservation-form select,
+#reservation-form input[type="tel"],
+
 #reservation-form input[type="date"],
 #reservation-form input[type="time"] {
-    width: 100%;
+    width: 95%;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+}
+#reservation-form select{
+    width: 98%;
     padding: 10px;
     margin-top: 5px;
     border: none;
@@ -246,7 +255,6 @@ nav ul li a:hover {
 }
 
 #reservation-form button:hover {
-    /* background-color: #c4a245; */
     color: #000;
 }
 
@@ -265,7 +273,7 @@ nav ul li a:hover {
 }
 
 #reservation-form input[type="text"],
-#reservation-form input[type="email"],
+#reservation-form input[type="tel"],
 #reservation-form select,
 #reservation-form input[type="date"],
 #reservation-form input[type="time"] {
@@ -283,6 +291,7 @@ nav ul li a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    
 }
 
 .horario-button {
@@ -292,65 +301,49 @@ nav ul li a:hover {
     padding: 5px 10px; 
     margin-right: 10px; 
     cursor: pointer; 
-    transition: border-color 0.3s; /* Adicione uma transição suave para a borda */
+    transition: border-color 0.3s; 
 }
 
 /* Botões de horário disponível */
 .horario-button.horario-disponivel {
-    background-color: green; /* Cor de fundo verde para horários disponíveis */
-    color: white; /* Texto em branco para melhor visibilidade */
+    background-color: green; 
+    color: white; 
 }
 
 /* Botões de horário ocupado */
 .horario-button.horario-ocupado {
-    background-color: red; /* Cor de fundo vermelha para horários ocupados */
-    color: white; /* Texto em branco para melhor visibilidade */
+    background-color: red; 
+    color: white; 
+}
+
+
+/* Botões de horário passados */
+.horario-button.horario-passado {
+    background-color: red; 
+    color: white; 
 }
 
 /* Botões de horário selecionado */
 .horario-button.horario-disponivel.selecionado {
-    background-color: darkgreen; /* Cor de fundo verde escuro para horários selecionados */
-    color: white; /* Texto em branco para melhor visibilidade */
+    background-color: darkgreen;
+    color: white; 
 }
 .horario-button.horario-ocupado.selecionado {
-    background-color: darkred; /* Cor de fundo verde escuro para horários selecionados */
-    color: white; /* Texto em branco para melhor visibilidade */
+    background-color: darkred; 
+    color: white; 
 }
+.horario-button.horario-passado.selecionado {
+    background-color: darkred; 
+    color: white; 
+}
+
 
 .horario-message {
     color: red;
     font-weight: bold;
-    display: none; /* Inicialmente, oculte a mensagem */
+    display: none; 
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-  }
-  
-  .close {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
 
 /* Footer */
 footer {
