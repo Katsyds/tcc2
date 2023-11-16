@@ -41,6 +41,23 @@
     </div>
   </section>
 
+  <section id="management" class="content-block">
+    <div class="management-block">
+    <h2>Gerenciamento de Serviços</h2>
+    <form id="management-form">
+        <label for="corte-input">Corte de Cabelo: </label>
+        <input type="number" id="corte-input" name="corte"><br><br>
+        <label for="barba-input">Barba e Bigode: </label>
+        <input type="number" id="barba-input" name="barba"><br><br>
+        <label for="tratamentos-input">Tratamentos Faciais: </label>
+        <input type="number" id="tratamentos-input" name="tratamentos"><br><br>
+        <label for="massagem-input">Massagem Capilar: </label>
+        <input type="number" id="massagem-input" name="massagem"><br><br>
+        <input type="submit" value="Atualizar Valores">
+    </form>
+  </div>
+</section>
+
   <footer>
     <p>&copy; 2023 Barbearia Tradicional. Todos os direitos reservados.</p>
   </footer>
@@ -96,7 +113,32 @@ excluirBtns.forEach(btn => {
   });
 });
 
-// ...
+document.getElementById("management-form").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    // Obtém os novos valores do formulário
+    const newServiceValues = {
+        corte: document.getElementById("corte-input").value,
+        barba: document.getElementById("barba-input").value,
+        tratamentos: document.getElementById("tratamentos-input").value,
+        massagem: document.getElementById("massagem-input").value
+    };
+
+    // Atualiza os valores no localStorage
+    localStorage.setItem("serviceValues", JSON.stringify(newServiceValues));
+
+    // Atualiza os valores na página index.html
+    document.getElementById("corte-value").textContent = newServiceValues.corte;
+    document.getElementById("barba-value").textContent = newServiceValues.barba;
+    document.getElementById("tratamentos-value").textContent = newServiceValues.tratamentos;
+    document.getElementById("massagem-value").textContent = newServiceValues.massagem;
+
+    // Limpa os valores do formulário
+    document.getElementById("management-form").reset();
+
+    alert("Valores atualizados com sucesso!");
+});
+
 
   })
   .catch(error => console.error('Erro na solicitação:', error));

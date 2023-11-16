@@ -1,6 +1,9 @@
 /* Estilos gerais */
 body {
-  background-color: #000;
+  background-image: url('img/img1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: #fff;
   margin: 0;
   padding: 0;
@@ -30,26 +33,26 @@ nav {
 /* Estilos para telas menores (dispositivos móveis) */
 @media screen and (max-width: 767px) {
   header {
-      padding: 5px 0;
+    padding: 5px 0;
   }
-  
+
   nav {
-      flex-direction: column;
-      align-items: flex-start;
-      text-align: center;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
   }
 
   .logo {
-      font-size: 1.2rem;
+    font-size: 1.2rem;
   }
-  table{
+
+  table {
     font-size: 0.5rem;
   }
 }
 
 #hero {
-  background: linear-gradient(to bottom, transparent, black), url('img/img1.jpg') center/cover no-repeat;
-  height: 100vh;
+  height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,15 +83,70 @@ table {
   color: black;
 }
 
-th, td {
+th,
+td {
   padding: 10px;
   border-bottom: 1px solid #ccc;
- 
 }
 
 thead {
   background-color: #2a2a2a;
   color: #fff;
+}
+
+/* Estilos para a seção de gerenciamento */
+#management {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #333;
+}
+
+.management-block{
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+#management h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#management-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#management-form label {
+  font-size: 16px;
+}
+
+#management-form input[type="number"] {
+  padding: 8px;
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+#management-form input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#management-form input[type="submit"]:hover {
+  background-color: #45a049;
 }
 
 footer {
