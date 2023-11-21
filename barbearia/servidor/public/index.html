@@ -40,10 +40,10 @@
     <section id="services" class="content-block">
         <h2>Serviços</h2>
         <ul class="services-list" id="services-list">
-            <li><span class="service-icon">&#9733;</span> Corte de Cabelo - R$<span id="corte-value">30</span></li>
-            <li><span class="service-icon">&#9733;</span> Barba e Bigode - R$<span id="barba-value">20</span></li>
-            <li><span class="service-icon">&#9733;</span> Tratamentos Faciais - R$<span id="tratamentos-value">40</span></li>
-            <li><span class="service-icon">&#9733;</span> Massagem Capilar - R$<span id="massagem-value">25</span></li>
+            <li><span class="service-icon">&#9733;</span> Corte de Cabelo - R$<span id="corte-value"></span></li>
+            <li><span class="service-icon">&#9733;</span> Barba e Bigode - R$<span id="barba-value"></span></li>
+            <li><span class="service-icon">&#9733;</span> Tratamentos Faciais - R$<span id="tratamentos-value"></span></li>
+            <li><span class="service-icon">&#9733;</span> Massagem Capilar - R$<span id="massagem-value"></span></li>
         </ul>
     </section>
 
@@ -79,7 +79,7 @@
             <label for="name">Nome:</label>
             <input type="text" id="name" name="name" required>
             <label for="numero">Telefone:</label>
-            <input type="text" id="numero" name="numero" placeholder="telefone" required>
+            <input type="text" id="numero" name="numero" placeholder="xx xxxxx-xxxx" maxlength="13" oninput="formatPhone(this)">
             <label for="service">Serviço:</label>
             <select id="service" name="service" required>
                 <option value="corte">Corte de Cabelo </option>
@@ -107,8 +107,8 @@
 
 
 
-            <button type="button" class="btn" id="agendar-button">Agendar</button>
-            <h5>Por favor, reserve seu horário com pelo menos um dia de antecedência. Horários para o dia atual estarão indisponíveis.</hh5>
+    <button type="button" class="btn" id="agendar-button" disabled>Agendar</button>
+        <h5>Por favor, reserve seu horário com pelo menos um dia de antecedência. Horários para o dia atual estarão indisponíveis.</hh5>
         </form>
     </section>
 
@@ -117,16 +117,20 @@
     </footer>
 
     <script>
+function formatPhone(input) {
+  let phoneNumber = input.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
 
-$(document).ready(function() {
-    $("#numero").inputmask({
-      mask: '(99) 99999-9999',
-      clearMaskOnLostFocus: false,
-      placeholder: '(__) _____-____',
-    });
-  });
+  if (phoneNumber.length > 2) {
+    phoneNumber = phoneNumber.replace(/^(\d{2})(\d{5})(\d{0,4})/, '$1 $2-$3');
+  } else if (phoneNumber.length > 5) {
+    phoneNumber = phoneNumber.replace(/^(\d{2})(\d{5})(\d{0,4})/, '$1 $2-$3');
+  }
 
-        // Exemplo de valores iniciais dos serviços
+  input.value = phoneNumber.slice(0, 13); // Limita o número máximo de caracteres
+}
+
+
+     // Exemplo de valores iniciais dos serviços
 const initialServiceValues = {
     corte: 30,
     barba: 20,
@@ -148,7 +152,7 @@ document.getElementById("corte-value").textContent = serviceValues.corte;
 document.getElementById("barba-value").textContent = serviceValues.barba;
 document.getElementById("tratamentos-value").textContent = serviceValues.tratamentos;
 document.getElementById("massagem-value").textContent = serviceValues.massagem;
-        
+
 
         let horarioSelecionado = null; // Variável para armazenar o horário selecionado
     
@@ -226,6 +230,7 @@ document.getElementById('date').addEventListener('change', async () => {
                 if (response.ok) {
                     const message = await response.text();
                     console.log(message);
+                    alert("Horario agendado com sucesso")
                 } else {
                     console.error('Erro ao enviar o formulário de agendamento.');
                     alert("horario indisponivel")
@@ -269,7 +274,6 @@ document.getElementById('date').addEventListener('change', async () => {
                 }
             });
 
-            // Restante do seu código dentro do evento de mudança de data
             // Obtém a data selecionada
             const dataSelecionada = document.getElementById('date').value;
 
@@ -281,9 +285,32 @@ document.getElementById('date').addEventListener('change', async () => {
                 btn.classList.toggle('horario-ocupado', horarioOcupado);
             });
         });
+        document.getElementById('date').addEventListener('change', () => {
+    const selectedDate = new Date(document.getElementById('date').value);
+    const today = new Date();
+
+    if (selectedDate < today || (selectedDate.getTime() === today.getTime() && selectedDate.getHours() <= today.getHours())) {
+        // Se a data selecionada for no passado ou para hoje e já passou do horário atual
+        document.getElementById('agendar-button').disabled = true;
+    } else {
+        document.getElementById('agendar-button').disabled = false;
+    }
+});
+
+// Adicione um evento de clique para os botões de horário
+const horarioButtons = document.querySelectorAll('.horario-button');
+horarioButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const selectedDate = new Date(document.getElementById('date').value);
+        const today = new Date();
+
+        if (selectedDate < today || (selectedDate.getTime() === today.getTime() && selectedDate.getHours() <= today.getHours())) {
+            // Se a data selecionada for no passado ou para hoje e já passou do horário atual
+            alert('Não é possível agendar para datas ou horários passados.');
+        }
+    });
+});
+
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.6/jquery.inputmask.min.js"></script>
-    
 </body>
 </html>

@@ -97,9 +97,9 @@ app.delete('/excluir-agendamento/:id', (req, res) => {
   });
 });
 
-
-
-
+app.get('/registro_geral', (req, res) => {
+  res.sendFile(__dirname + '/public/registro_geral.html');
+});
 
 
 app.listen(port, () => {

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style2.css"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <title>Registros Gerais</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">Barbearia Tradicional</div>
+    </nav>
+  </header>
+  
+  <section id="hero">
+    <div class="hero-content">
+      <div class="banner">
+        <div class="content-container">
+          <h1>Registros</h1>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Horário</th>
+                <th>Data</th>
+                <th>Serviço</th>
+                <th>Número</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Os agendamentos serão inseridos aqui dinamicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2023 Barbearia Tradicional. Todos os direitos reservados.</p>
+  </footer>
+  <script>
+    // Registro Geral - JavaScript
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Carregar registros ao carregar a página
+    carregarRegistros();
+
+    // Adicionar evento para duplicar registros ao clicar em um botão específico na página de gerenciamento
+    document.getElementById('duplicate-registro-button').addEventListener('click', function () {
+        duplicarRegistro();
+        carregarRegistros(); // Atualizar a exibição dos registros após duplicação
+    });
+});
+
+function carregarRegistros() {
+    // Lógica para carregar registros do armazenamento local ou de onde quer que estejam armazenados
+    const registros = obterRegistros();
+    exibirRegistros(registros);
+}
+
+function obterRegistros() {
+    // Lógica para obter registros do armazenamento local ou de onde quer que estejam armazenados
+    // Pode ser uma chamada AJAX para um servidor, por exemplo
+    // Retorne um array de registros
+    return [];
+}
+
+function salvarRegistros(registros) {
+    // Lógica para salvar registros no armazenamento local ou onde desejar
+}
+
+function duplicarRegistro() {
+    // Lógica para duplicar um registro
+    // Pode envolver a cópia de registros da página de gerenciamento ou de onde quer que estejam armazenados
+    const registroDuplicado = { /* Dados do registro a ser duplicado */ };
+
+    // Adicione o registro duplicado ao armazenamento local ou à fonte de dados
+    const registros = obterRegistros();
+    registros.push(registroDuplicado);
+    salvarRegistros(registros);
+}
+
+function exibirRegistros(registros) {
+    const registrosList = document.getElementById('registros-list');
+
+    // Limpar a lista antes de adicionar os registros
+    registrosList.innerHTML = '';
+
+    // Adicionar cada registro à lista
+    registros.forEach(registro => {
+        const li = document.createElement('li');
+        li.textContent = /* Formatando a exibição do registro */
+        registrosList.appendChild(li);
+    });
+}
+
+  </script> 
+</body>
+</html>
