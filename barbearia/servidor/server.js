@@ -16,6 +16,14 @@ db.run(`CREATE TABLE IF NOT EXISTS agendamentos (
   numero TEXT,
   data TEXT
 )`);
+db.run(`CREATE TABLE IF NOT EXISTS agendamentos_gerais (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome TEXT,
+  horario TEXT,
+  servico TEXT,
+  numero TEXT,
+  data TEXT
+)`);
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
@@ -49,13 +57,22 @@ app.post('/agendamento', express.json(), (req, res) => {
             console.error(err.message);
             res.status(500).send('Erro ao agendar horário');
           } else {
-            res.send('Horário agendado com sucesso');
+            // Inserir na tabela de agendamentos gerais
+            db.run(`INSERT INTO agendamentos_gerais (nome, horario, numero, servico, data) VALUES (?, ?, ?, ?, ?)`, [nome, horario, numero, servico, data], (err) => {
+              if (err) {
+                console.error(err.message);
+                res.status(500).send('Erro ao registrar o agendamento geral');
+              } else {
+                res.send('Horário agendado com sucesso');
+              }
+            });
           }
         });
       }
     }
   });
 });
+
 
 app.get('/gerenciamento', (req, res) => {
   res.sendFile(__dirname + '/public/gerenciamento.html');
@@ -93,6 +110,17 @@ app.delete('/excluir-agendamento/:id', (req, res) => {
       res.status(500).send('Erro ao excluir o agendamento');
     } else {
       res.send('Agendamento excluído com sucesso');
+    }
+  });
+});
+
+app.get('/registro_geral_data', (req, res) => {
+  db.all(`SELECT * FROM agendamentos_gerais ORDER BY data, horario`, [], (err, rows) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send('Erro ao buscar agendamentos gerais');
+    } else {
+      res.json(rows);
     }
   });
 });

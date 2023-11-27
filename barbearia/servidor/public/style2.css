@@ -75,6 +75,11 @@ nav {
   color: #2a2a2a;
 }
 
+.table-container {
+  max-height: 250px; /* Defina a altura máxima */
+  overflow-y: auto; /* Adicione a barra de rolagem vertical quando necessário */
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -82,7 +87,6 @@ table {
   margin-top: 20px;
   color: black;
 }
-
 th,
 td {
   padding: 10px;
@@ -148,6 +152,12 @@ thead {
 #management-form input[type="submit"]:hover {
   background-color: #45a049;
 }
+
+#registrosGerais {
+  max-height: 100px;
+  overflow-y: auto;
+}
+
 
 footer {
   background-color: #2a2a2a;
