@@ -1,6 +1,7 @@
 /* Estilos gerais */
+
 body {
-  background-image: url('img/img1.jpg');
+  background-image: url('img/f1.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -51,42 +52,35 @@ nav {
   }
 }
 
-#hero {
-  height: 60vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: #fff;
-}
 
-.banner {
-  position: relative;
-  z-index: 1;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 5px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.banner h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  color: #2a2a2a;
-}
 
 .table-container {
-  max-height: 250px; /* Defina a altura máxima */
-  overflow-y: auto; /* Adicione a barra de rolagem vertical quando necessário */
+  max-height: 460px;
+  width: 900px;
+  overflow-y: auto;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+h1{
+  font-size: 30px;
+  align-items: center;
+  text-align: center;
 }
 
 table {
-  width: 100%;
+  width: 860px;
   border-collapse: collapse;
   border-spacing: 0;
   margin-top: 20px;
   color: black;
 }
+
 th,
 td {
   padding: 10px;
@@ -98,6 +92,40 @@ thead {
   color: #fff;
 }
 
+.container {
+  display: flex;
+  align-items: flex-start; /* Alinhamento superior */
+  padding: 20px; /* Espaçamento para a seção */
+  gap: 20px; /* Espaçamento entre os containers */
+  color: #2a2a2a;
+  width: 95%;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between; /* Espaço entre os elementos filhos */
+}
+
+
+
+.table-section,
+.form-section {
+  flex: 1; /* Distribuição igual de espaço */
+  padding: 20px; /* Adicionando um espaçamento interno */
+  border-radius: 10px; /* Borda arredondada */
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Sombra */
+  background-color: rgba(255, 255, 255, 0.95); /* Cor de fundo */
+}
+.table-section{
+  margin-right: 50px;
+  width: 1000px;
+
+}
+.form-section{
+width: 320px;
+}
+
+
 /* Estilos para a seção de gerenciamento */
 #management {
   height: 100vh;
@@ -108,7 +136,7 @@ thead {
   color: #333;
 }
 
-.management-block{
+.management-block {
   position: relative;
   z-index: 1;
   padding: 20px;
@@ -116,7 +144,6 @@ thead {
   border-radius: 5px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
-
 
 #management h2 {
   color: #333;
@@ -128,6 +155,7 @@ thead {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 20px; /* Espaçamento entre a tabela e o formulário */
 }
 
 #management-form label {
@@ -158,10 +186,9 @@ thead {
   overflow-y: auto;
 }
 
-
 footer {
   background-color: #2a2a2a;
   color: #fff;
   text-align: center;
-  padding: 20px 0;
+  padding: 5px 0;
 }
