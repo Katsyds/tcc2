@@ -9,7 +9,9 @@
 <body>
     <header>
         <nav>
-            <div class="logo">Barbearia Tradicional</div>
+            <div class="logo">
+                <img src="img/logo-removebg-preview.png" alt="Logo da Barbearia Tradicional">
+              </div>
             <ul>
                 <li><a href="#about">Sobre Nós</a></li>
                 <li><a href="#services">Serviços</a></li>
@@ -182,7 +184,7 @@ document.getElementById('date').addEventListener('change', async () => {
     const dataSelecionada = document.getElementById('date').value;
 
     // Atualiza as classes CSS dos botões com base na disponibilidade do horário para a nova data
-    buttons.forEach(async btn => { // Adicione "async" aqui
+    buttons.forEach(async btn => { 
         const horario = btn.textContent;
         const horarioOcupado = await verificarHorarioOcupado(dataSelecionada, horario);
         btn.classList.toggle('horario-disponivel', !horarioOcupado);

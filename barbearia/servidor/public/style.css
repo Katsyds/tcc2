@@ -32,6 +32,10 @@ nav {
     font-weight: bold;
     color: #dcb45e; 
 }
+.logo img {
+    width: 50px; 
+    height: auto; 
+  }
 
 nav ul {
     list-style: none;
@@ -133,7 +137,6 @@ nav ul li a:hover {
 }
 
 
-/* Services section */
 .services-list {
     list-style: none;
     margin: 0;
@@ -157,7 +160,6 @@ nav ul li a:hover {
     color: #dcb45e;
 }
 
-/* Image gallery */
 .image-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -171,7 +173,6 @@ nav ul li a:hover {
     border-radius: 5px;
 }
 
-/* Testimonials section */
 .testimonial {
     background-color: #3a3a3a;
     padding: 20px;
@@ -186,7 +187,6 @@ nav ul li a:hover {
     color: #ccc;
 }
 
-/* Contact section */
 .content-block {
     max-width: 800px;
     margin: 0 auto;
@@ -197,7 +197,6 @@ nav ul li a:hover {
     margin-bottom: 40px;
 }
 
-/* Estilizando o formulário de agendamento */
 #reservation-form {
     max-width: 600px;
     margin: 0 auto;
@@ -258,7 +257,6 @@ nav ul li a:hover {
     color: #000;
 }
 
-/* Estilize o formulário para telas menores */
 #reservation-form {
     padding: 20px;
 }
@@ -286,7 +284,6 @@ nav ul li a:hover {
     margin-top: 15px;
 }
 
-/* Estilize os botões de horário */
 .horario-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -345,7 +342,6 @@ nav ul li a:hover {
 }
 
 
-/* Footer */
 footer {
     background-color: #2a2a2a;
     color: #fff;

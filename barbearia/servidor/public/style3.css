@@ -30,6 +30,10 @@ nav {
   font-size: 1.5rem;
   font-weight: bold;
 }
+.logo img {
+  width: 50px; /* Largura desejada para o logotipo */
+  height: auto; /* A altura é ajustada automaticamente para manter as proporções */
+}
 
 /* Estilos para telas menores (dispositivos móveis) */
 @media screen and (max-width: 767px) {

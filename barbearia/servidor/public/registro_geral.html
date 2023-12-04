@@ -11,8 +11,10 @@
 <body>
   <header>
     <nav>
-      <div class="logo">Barbearia Tradicional</div>
-    </nav>
+      <div class="logo">
+        <img src="img/logo-removebg-preview.png" alt="Logo da Barbearia Tradicional">
+      </div>
+   </nav>
   </header>
   
   <section id="hero">
@@ -45,7 +47,6 @@
   <script>
     $(document).ready(function() {
       $.get('/registro_geral_data', function(data) {
-        // Manipule os dados recebidos e insira-os na página HTML
         const registros = data.map(registro => `
           <tr>
             <td>${registro.id}</td>
